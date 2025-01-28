@@ -1,10 +1,23 @@
 const express = require("express")
 const database = require("./src/database");
+const productRouter = require("./src/routes/product");
+const userRouter = require("./src/routes/user");
+const organizationRouter = require("./src/routes/organization");
+const inventoryRouter = require("./src/routes/inventory");
+const movementRouter = require("./src/routes/inventoryMovement");
 
 const port = 3000
 const app = express()
 
 app.use(express.json())
+
+app.post('/api/v1/login', () => {})
+
+app.use('/api/vi/organization', organizationRouter)
+app.use('/api/v1/user', userRouter)
+app.use('/api/v1/product', productRouter)
+app.use('/api/v1/inventory', inventoryRouter)
+app.use('/api/vi/inventoryMovement', movementRouter)
 
 database.db
     .sync({force: false})
