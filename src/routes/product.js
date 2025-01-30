@@ -1,11 +1,11 @@
 const express = require("express")
-
+const ApiProduct = require("../api/product")
 const productRouter = express.Router()
 
-productRouter.get('/', () => {})
-productRouter.get('/:id', () => {})
-productRouter.post('/', () => {})
-productRouter.put('/:id', () => {})
-productRouter.delete('/:id', () => {})
+productRouter.get('/', ApiProduct.FindAll)
+productRouter.get('/:id', ApiProduct.FindById)
+productRouter.post('/', ApiProduct.Create)
+productRouter.put('/:id', ApiProduct.Update)
+productRouter.delete('/:id', ApiProduct.Delete)
 
 module.exports = productRouter

@@ -13,7 +13,7 @@ app.use(express.json())
 
 app.post('/api/v1/login', () => {})
 
-app.use('/api/vi/organization', organizationRouter)
+app.use('/api/v1/organization', organizationRouter)
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/product', productRouter)
 app.use('/api/v1/inventory', inventoryRouter)

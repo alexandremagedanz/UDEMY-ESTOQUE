@@ -1,11 +1,11 @@
 const express = require("express")
-
+const ApiInventory = require("../api/inventory")
 const inventoryRouter = express.Router()
 
-inventoryRouter.get('/', () => {})
-inventoryRouter.get('/:id', () => {})
-inventoryRouter.post('/', () => {})
-inventoryRouter.put('/:id', () => {})
-inventoryRouter.delete('/:id', () => {})
+inventoryRouter.get('/', ApiInventory.FindAll)
+inventoryRouter.get('/:id', ApiInventory.FindById)
+inventoryRouter.post('/', ApiInventory.Create)
+inventoryRouter.put('/:id', ApiInventory.Update)
+inventoryRouter.delete('/:id', ApiInventory.Delete)
 
 module.exports = inventoryRouter
