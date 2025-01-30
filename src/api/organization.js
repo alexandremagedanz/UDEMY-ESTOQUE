@@ -1,9 +1,11 @@
+const serviceOrganization = require("../service/organization")
+
 class ApiOrganization {
 
     async FindById(req, res){
         try {
             const { id } = req.params
-            const organization = { id } // service.findById(organizationId)
+            const organization = await serviceOrganization.FindById(id)
             res.status(200).send({organization})  
         } catch (error) {
             res.status(500).send({msg: error.message})              
@@ -12,7 +14,7 @@ class ApiOrganization {
     async Create(req, res) {
         try {
             const {name, address, phone, email} = req.body
-            const organization = {name, address, phone, email} // service.Create(name, address, phone, email)   
+            const organization = await serviceOrganization.Create(name, address, phone, email)   
             res.status(200).send({organization})             
         } catch (error) {
             res.status(500).send({msg: error.message})                          
@@ -22,7 +24,7 @@ class ApiOrganization {
         try {
             const { id } = req.params
             const {name, address, phone, email} = req.body
-            const organization = { id, name, address, phone, email } // service.Update(id, name, address, phone, email)   
+            const organization = await serviceOrganization.Update(id, name, address, phone, email)
             res.status(200).send({organization})             
         } catch (error) {
             res.status(500).send({msg: error.message})                          
@@ -31,7 +33,7 @@ class ApiOrganization {
     async Delete(req, res){
         try {
             const { id } = req.params
-            const organization = { id } // service.Delete(id)   
+            const organization = await serviceOrganization.Delete(id)
             res.status(204).send()             
         } catch (error) {
             res.status(500).send({msg: error.message})                          

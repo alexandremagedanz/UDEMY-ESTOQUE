@@ -17,7 +17,7 @@ app.use('/api/v1/organization', organizationRouter)
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/product', productRouter)
 app.use('/api/v1/inventory', inventoryRouter)
-app.use('/api/vi/inventoryMovement', movementRouter)
+app.use('/api/v1/inventoryMovement', movementRouter)
 
 database.db
     .sync({force: false})

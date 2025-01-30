@@ -1,32 +1,30 @@
+const serviceInventoryMovement = require('../service/inventoryMovement')
 class ApiInventoryMovement {
 
-    async FindById(req, res){
+    async FindAll(req, res){
         try {
-            const organizationId = 1
-            const { id, inventoryId } = req.params
-            const inventoryMovement = {} // service.findById(inventoryMovementId)
-            res.status(200).send({inventoryMovement})  
+            const { inventoryId } = req.params
+            const inventoryMovements = await serviceInventoryMovement.FindAll(inventoryId)
+            res.status(200).send({inventoryMovements})  
         } catch (error) {
             res.status(500).send({msg: error.message})              
         }
     }
-    async FindAll(req, res){
+    async FindById(req, res){
         try {
-            const organizationId = 1
-            const { inventoryId } = req.params
-            const inventoryMovements = {} // service.findAll()
-            res.status(200).send({inventoryMovements})  
+            const { id, inventoryId } = req.params
+            const inventoryMovement = await serviceInventoryMovement.FindById(inventoryId, id)
+            res.status(200).send({inventoryMovement})  
         } catch (error) {
             res.status(500).send({msg: error.message})              
         }
     }
     async Create(req, res) {
         try {
-            const organizationId = 1
-            const userId = 1
+            const userId = 2
             const { inventoryId } = req.params
-            const { type, amout, productId } = req.body
-            const inventoryMovement = { } // service.Create(name, email, password, role, organizationId)   
+            const { type, amount, productId } = req.body
+            const inventoryMovement = await serviceInventoryMovement.Create(inventoryId, userId, type, amount, productId)   
             res.status(200).send({inventoryMovement})             
         } catch (error) {
             res.status(500).send({msg: error.message})                          
@@ -34,10 +32,9 @@ class ApiInventoryMovement {
     }
     async Update(req, res) {
         try {
-            const organizationId = 1
-            const { inventoryId } = req.params
-            const { type, amout, productId } = req.body
-            const inventoryMovement = {  } // service.Update(id, name, email, password, role, organizationId)   
+            const { inventoryId , id} = req.params
+            const { type, amount, productId } = req.body
+            const inventoryMovement = await serviceInventoryMovement.Update(inventoryId, id, type, amount, productId)    
             res.status(200).send({inventoryMovement})             
         } catch (error) {
             res.status(500).send({msg: error.message})                          
@@ -45,10 +42,9 @@ class ApiInventoryMovement {
     }
     async Delete(req, res){
         try {
-            const organizationId = 1
             const { id, inventoryId } = req.params
-            const inventoryMovement = { id } // service.Delete(id)   
-            res.status(204).send()             
+            const inventoryMovement = await serviceInventoryMovement.Delete(inventoryId, id)       
+            res.status(204).send({inventoryMovement})             
         } catch (error) {
             res.status(500).send({msg: error.message})                          
         }

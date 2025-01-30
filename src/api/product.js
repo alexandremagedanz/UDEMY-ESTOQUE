@@ -1,10 +1,11 @@
+const serviceProduct = require("../service/product")
 class ApiProduct {
 
     async FindById(req, res){
         try {
             const { id } = req.params
             const organizationId = 1
-            const product = { id } // service.findById(productId)
+            const product = await serviceProduct.FindById(organizationId, id)
             res.status(200).send({product})  
         } catch (error) {
             res.status(500).send({msg: error.message})              
@@ -13,7 +14,7 @@ class ApiProduct {
     async FindAll(req, res){
         try {
             const organizationId = 1
-            const products = [ { organizationId } ] // service.findAll()
+            const products = await serviceProduct.FindAll(organizationId)
             res.status(200).send( { products } )  
         } catch (error) {
             res.status(500).send({msg: error.message})              
@@ -23,7 +24,7 @@ class ApiProduct {
         try {
             const organizationId = 1
             const {name, description } = req.body
-            const product = { } // service.Create(name, email, password, role, organizationId)   
+            const product = await serviceProduct.Create(organizationId, name, description)  
             res.status(200).send({product})             
         } catch (error) {
             res.status(500).send({msg: error.message})                          
@@ -34,7 +35,7 @@ class ApiProduct {
             const organizationId = 1
             const {id} = req.params
             const {name, description} = req.body
-            const product = { } // service.Update(id, name, email, password, role, organizationId)   
+            const product = await serviceProduct.Update(organizationId, id, name, description)  
             res.status(200).send({product})             
         } catch (error) {
             res.status(500).send({msg: error.message})                          
@@ -44,8 +45,8 @@ class ApiProduct {
         try {
             const organizationId = 1
             const { id } = req.params
-            const product = {  } // service.Delete(id)   
-            res.status(204).send()             
+            const product = await serviceProduct.Delete(organizationId, id)  
+            res.status(204).send({product})             
         } catch (error) {
             res.status(500).send({msg: error.message})                          
         }
