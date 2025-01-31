@@ -21,7 +21,7 @@ app.use('/api/v1/inventory', inventoryRouter)
 app.use('/api/v1/inventoryMovement', movementRouter)
 
 database.db
-    .sync({force: false})
+    .sync({force: false })
     .then((_) => {
         app.listen(port, () => {
             console.info(`Servidor rodando na porta ${port}.`)
